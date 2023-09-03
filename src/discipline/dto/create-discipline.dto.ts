@@ -1,3 +1,4 @@
+import { Student } from '@prisma/client'
 import { IsAlpha, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateDisciplineDto {
@@ -9,7 +10,7 @@ export class CreateDisciplineDto {
 
   @IsNumber()
   room: number
-
+  
   @IsOptional()
-  enrollmentId: string | null
+  studentIDs?: string[]
 }

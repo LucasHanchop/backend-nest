@@ -14,7 +14,7 @@ export class UpdateDisciplineDto {
 
   @IsOptional()
   room: number
-
+  
   @IsOptional()
-  enrollmentId: string | null
+  studentIDs?: string[]
 }

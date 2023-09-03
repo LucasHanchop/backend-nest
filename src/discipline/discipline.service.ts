@@ -1,8 +1,8 @@
 import { PrismaService } from 'src/prisma/prisma.service'
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateDisciplineDto } from './dto/create-discipline.dto'
 import { UpdateDisciplineDto } from './dto/update-discipline.dto'
-import { Discipline } from '@prisma/client'
+import { Discipline, Student } from '@prisma/client'
 
 @Injectable()
 export class DisciplineService {
@@ -15,11 +15,8 @@ export class DisciplineService {
     
     return await this.prisma.discipline.create({
       data: {
-        ...discipline
-        // name: discipline.name,
-        // room: discipline.room,    
-        // teacher: discipline.teacher,
-        // enrollmentId: discipline?.enrollmentId
+        ...discipline,
+        studentIDs: [],
       }
     })
   }
@@ -34,13 +31,19 @@ export class DisciplineService {
     })
   }
 
-  async update(id: string, updateDisciplineDto: UpdateDisciplineDto): Promise<Discipline> {
+  async update(id: string, updateDisciplineDto: UpdateDisciplineDto, studentId?: string): Promise<Discipline> {
     const discipline: UpdateDisciplineDto = updateDisciplineDto
+    const student: Student | null = await this.prisma.student.findFirst({
+      where: { id: studentId }
+    })
     
+    if(!student) throw new NotFoundException("Student not found!")
+
     return await this.prisma.discipline.update({
       where: { id: id },
       data: {
-        ...discipline
+        ...discipline,
+        studentIDs: [student?.id]
       }
     })
   }
