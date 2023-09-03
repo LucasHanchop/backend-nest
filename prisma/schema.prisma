@@ -25,6 +25,6 @@ model Discipline {
   name          String
   teacher       String 
   room          Int 
-  student       Student @relation(fields: [enrollmentId], references: [id])  
-  enrollmentId  String @db.ObjectId
+  student       Student? @relation(fields: [enrollmentId], references: [id])  
+  enrollmentId  String? @db.ObjectId
 }
