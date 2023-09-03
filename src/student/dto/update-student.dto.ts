@@ -1,4 +1,23 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateStudentDto } from './create-student.dto';
+import { IsNumber, IsOptional, IsString } from "class-validator";
 
-export class UpdateStudentDto extends PartialType(CreateStudentDto) {}
+export class UpdateStudentDto {
+    @IsOptional()
+    @IsNumber()
+    enrollment: number
+
+    @IsOptional()
+    @IsString()
+    name: string
+
+    @IsOptional()
+    @IsString()
+    phone: string
+
+    @IsOptional()
+    @IsString()
+    address: string
+
+    @IsOptional()
+    @IsString()
+    disciplineIDs?: string[]
+}

@@ -12,8 +12,7 @@ export class StudentService {
     const student: CreateStudentDto = createStudentDto
     return await this.prisma.student.create({
       data: {
-        ...student,
-        disciplineIDs: [],
+        ...student
       }
     })
   }
@@ -22,15 +21,26 @@ export class StudentService {
     return await this.prisma.student.findMany()
   }
 
-  async findOne(id: string) {
-    return `This action returns a #${id} student`;
+  async findOne(id: string): Promise<Student | null> {
+    return await this.prisma.student.findFirst({
+      where: { id: id }
+    })
   }
 
   async update(id: string, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+    const student: UpdateStudentDto = updateStudentDto
+
+    return await this.prisma.student.update({
+      where: { id: id },
+      data: {
+        ...student
+      }
+    })
   }
 
-  async remove(id: string) {
-    return `This action removes a #${id} student`;
+  async remove(id: string): Promise<Student> {
+    return await this.prisma.student.delete({
+      where: { id: id }
+    })
   }
 }

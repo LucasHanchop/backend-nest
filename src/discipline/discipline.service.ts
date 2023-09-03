@@ -15,8 +15,7 @@ export class DisciplineService {
     
     return await this.prisma.discipline.create({
       data: {
-        ...discipline,
-        studentIDs: [],
+        ...discipline
       }
     })
   }
@@ -31,19 +30,12 @@ export class DisciplineService {
     })
   }
 
-  async update(id: string, updateDisciplineDto: UpdateDisciplineDto, studentId?: string): Promise<Discipline> {
+  async update(id: string, updateDisciplineDto: UpdateDisciplineDto): Promise<Discipline> {
     const discipline: UpdateDisciplineDto = updateDisciplineDto
-    const student: Student | null = await this.prisma.student.findFirst({
-      where: { id: studentId }
-    })
-    
-    if(!student) throw new NotFoundException("Student not found!")
-
     return await this.prisma.discipline.update({
       where: { id: id },
       data: {
-        ...discipline,
-        studentIDs: [student?.id]
+        ...discipline
       }
     })
   }
