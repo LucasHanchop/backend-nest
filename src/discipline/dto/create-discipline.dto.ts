@@ -10,7 +10,5 @@ export class CreateDisciplineDto {
 
   @IsNumber()
   room: number
-  
-  @IsOptional()
-  studentIDs?: string[]
+
 }

@@ -6,17 +6,15 @@ import { Discipline, Student } from '@prisma/client'
 
 @Injectable()
 export class DisciplineService {
-
   constructor(private prisma: PrismaService) {}
 
-
   async create(createDisciplineDto: CreateDisciplineDto): Promise<Discipline> {
-    const discipline: CreateDisciplineDto  = createDisciplineDto
-    
+    const discipline: CreateDisciplineDto = createDisciplineDto
+
     return await this.prisma.discipline.create({
       data: {
-        ...discipline
-      }
+        ...discipline,
+      },
     })
   }
 
@@ -26,17 +24,20 @@ export class DisciplineService {
 
   async findOne(id: string): Promise<Discipline | null> {
     return await this.prisma.discipline.findFirst({
-      where: { id: id }
+      where: { id: id },
     })
   }
 
-  async update(id: string, updateDisciplineDto: UpdateDisciplineDto): Promise<Discipline> {
+  async update(
+    id: string,
+    updateDisciplineDto: UpdateDisciplineDto,
+  ): Promise<Discipline> {
     const discipline: UpdateDisciplineDto = updateDisciplineDto
     return await this.prisma.discipline.update({
       where: { id: id },
       data: {
-        ...discipline
-      }
+        ...discipline,
+      },
     })
   }
 

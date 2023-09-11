@@ -17,8 +17,7 @@ model Student {
   name          String 
   phone         String @unique
   address       String
-  discipline    Discipline[] @relation(fields: [disciplineIDs], references: [id])
-  disciplineIDs  String[] @unique @db.ObjectId 
+  avatarUrl     String
 }
 
 model Discipline {
@@ -26,6 +25,4 @@ model Discipline {
   name          String
   teacher       String 
   room          Int 
-  student       Student[] @relation(fields: [studentIDs], references: [id])  
-  studentIDs  String[] @unique @db.ObjectId
 }

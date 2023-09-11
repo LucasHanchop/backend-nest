@@ -1,15 +1,10 @@
-import {
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator'
+import { IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class UpdateDisciplineDto {
   @IsOptional()
   @IsString()
   name: string
 
-  
   @IsOptional()
   @IsString()
   teacher: string
@@ -17,8 +12,5 @@ export class UpdateDisciplineDto {
   @IsOptional()
   @IsNumber()
   room: number
-  
-  @IsOptional()
-  @IsString()
-  studentIDs?: string[]
+
 }

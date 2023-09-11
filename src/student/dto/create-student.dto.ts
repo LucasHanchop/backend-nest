@@ -1,25 +1,19 @@
-import { Discipline } from "@prisma/client";
-import { IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString } from "class-validator";
-
-
-
-
+import { IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateStudentDto {
+  @IsNumber()
+  enrollment: number
 
-    @IsNumber()
-    enrollment: number
+  @IsString()
+  name: string
 
-    @IsString()
-    name: string
+  @IsString()
+  phone: string
 
-    @IsString()
-    phone: string
+  @IsString()
+  address: string
 
-    @IsString()
-    address: string
-
-    @IsOptional()
-    disciplineIDs?: string[]
-
+  @IsOptional()
+  @IsString()
+  avatarUrl: string
 }

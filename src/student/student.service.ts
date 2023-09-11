@@ -12,8 +12,8 @@ export class StudentService {
     const student: CreateStudentDto = createStudentDto
     return await this.prisma.student.create({
       data: {
-        ...student
-      }
+        ...student,
+      },
     })
   }
 
@@ -23,7 +23,7 @@ export class StudentService {
 
   async findOne(id: string): Promise<Student | null> {
     return await this.prisma.student.findFirst({
-      where: { id: id }
+      where: { id: id },
     })
   }
 
@@ -33,14 +33,14 @@ export class StudentService {
     return await this.prisma.student.update({
       where: { id: id },
       data: {
-        ...student
-      }
+        ...student,
+      },
     })
   }
 
   async remove(id: string): Promise<Student> {
     return await this.prisma.student.delete({
-      where: { id: id }
+      where: { id: id },
     })
   }
 }
